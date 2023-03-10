@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/abc91cab4a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <% const user = username %>
+    <div class="container home">
+        <div class="container-item home">
+            <div class="container home-header">
+                <div class="header-item">
+                    <div class="h-item logo">
+                        <h5 class="sm-header">SM_TYPE_SHII</h5>
+                    </div>
+                    <div class="h-item icons">
+                        <i class="fa-solid fa-camera"></i>
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-image" style="flex-grow: 1;">
+                       
+                    </div>
+                    <div class="card-title" style="flex-grow: 4;">
+                        <%= user %>
+                    </div>
+                    <div class="card-more" style="flex-grow: 1;">
+                        
+                    </div>
+                </div>
+                <div class="card-body">
+
+                </div>
+                <div class="card-footer">
+                    <div class="card-footer-item"></div>
+                    <div class="card-footer-item"></div>
+                </div>
+            </div>
+            <%- include('./partials/footer.ejs', {user: user}) %>
+        </div>
+    </div>
+</body>
+</html>

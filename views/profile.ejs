@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/abc91cab4a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container profile">
+        <div class="container-item profile">
+            <div class="profile-body">
+                <div class="profile-header">
+                    <div class="header-title">
+                           <div class="h-t-item" style="flex-grow: 1;"><a href="/home"><i class="fa-solid fa-angle-left"></i></a></div>
+                           <div class="h-t-item" style="flex-grow: 4;"><p><%= data.username %></p></div>
+                           <div class="h-t-item" style="flex-grow: 1;"><i class="fa-solid fa-ellipsis"></i></div>
+                    </div>
+                    <div class="header-head">
+                        <div class="h-h-item avi" style="flex-grow: 1;"></div>
+                        <div class="h-h-item profile-stat" style="flex-grow: 4;">
+                            <div class="stats post-count"></div>
+                            <div class="stats follower-count"></div>
+                            <div class="stats following-count"></div>
+                            <div class="stats follow">
+                                <button>Follow</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-main">
+                  <div class="tabs">
+                    <div class="tabs-item" style="align-self: flex-start;">
+                        POSTS
+                    </div>
+                  </div> 
+                  
+                  <div class="tab-container">
+                        <div class="tab-content" id="post">
+
+                        </div>
+                  </div>
+
+                  
+                  
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
