@@ -14,7 +14,9 @@ Router.get('/home', Controller.home_index)
 
 Router.get('/profile', Controller.profile_index)
 
-Router.get(' ', Controller.not_found)
+Router.get('/new-post', Controller.post_index)
+
+Router.get(Controller.not_found)
 
 
 

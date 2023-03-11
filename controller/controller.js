@@ -1,8 +1,25 @@
 const ejs = require('ejs')
 const Users = require('../models/models')
+const Posts = require('../models/post')
 const passport = require('passport')
+const fs = require('fs');
+const path = require('path');
 const passportLocalMongoose = require('passport-local-mongoose')
 const uniRl = require('url')
+const multer = require('multer');
+ 
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+ 
+const upload = multer({ storage: storage });
 
 
 passport.serializeUser(function(Users, done) {
@@ -29,7 +46,15 @@ const home_index = (req, res) => {
         console.log(req)
         res.render('home')
     }else{
-        res.redirect('/')
+        imgModel.find({}, (err, items) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('An error occurred', err);
+            }
+            else {
+                res.render('home', { items: items });
+            }
+        });
     }
 }
 
@@ -78,6 +103,29 @@ const login_post = (req, res) => {
     } )
 }
 
+const post_index = (req, res) => {
+    res.render('post')
+}
+
+const post_post =  (req, res, next) => {
+            const obj = {
+                caption: req.body.caption,
+                img: {
+                    data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+                    contentType: 'image/png'
+                }
+            }
+            Posts.create(obj, (err, item) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    alert('Image uploaded Successfully')
+                    res.redirect('/profile');
+                }
+            });
+};
+
 const not_found = (req, res) => {
     res.send('GO BACK MF')
 }
@@ -90,5 +138,6 @@ module.exports = {
     profile_index,
     register_post,
     login_post,
+    post_index,
     not_found
 }

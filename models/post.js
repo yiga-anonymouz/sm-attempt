@@ -1,11 +1,18 @@
 const mongoose = require('mongoose')
-const express = require('express')
 
 const postSchema = new mongoose.Schema({
     caption: String,
-    image: String,
-    date: new Date,
-    likes: String
+    date: new Date(),
+    likes: Number,
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "profiles"
+    },
+    image: {
+        data: Buffer,
+        contentType: String
+    }
 })
 
 const Posts = new mongoose.model('posts', postSchema)
