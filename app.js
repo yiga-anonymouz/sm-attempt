@@ -4,6 +4,7 @@ const ejs = require('ejs')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const bodyParser = require('body-parser')
+const session = require('express-session')
 const router = require('./routes/routes')
 
 const PORT = process.env.PORT
@@ -16,7 +17,7 @@ app.use(express.static(`${__dirname}/public`))
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
 app.set('view engine', 'ejs')
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }))
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }))
 app.use(passport.initialize())
 app.use(passport.session())
 

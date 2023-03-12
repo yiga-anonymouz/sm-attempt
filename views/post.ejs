@@ -12,18 +12,18 @@
         <div class="container-post">
             <div class="post-card">
                 <div class="post-body">
+                <form action="/new-post" method="post" enctype="multipart/form-data">
                     <div class="post-item post-file">
-                        <form action="/post" method="post" enctype="multipart/form-data"></form>
-                        <input type="file" name="post" id="">
+                        <input type="file" accept="image/*" name="image" id="">
                     </div>
                     <div class="post-item post-comment">
                         <textarea name="caption" id="" cols="18" rows="6"></textarea>
-                        </form>
                     </div>
-                </div>
-                <div class="post-footer">
-                    <button type="submit">POST</button>
-                </div>
+                    </div>
+                    <div class="post-footer">
+                        <button type="submit">POST</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

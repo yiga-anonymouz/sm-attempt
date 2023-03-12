@@ -2,11 +2,10 @@ const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
     caption: String,
-    date: new Date(),
+    date: Date,
     likes: Number,
     id: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
         ref: "profiles"
     },
     image: {
@@ -15,6 +14,6 @@ const postSchema = new mongoose.Schema({
     }
 })
 
-const Posts = new mongoose.model('posts', postSchema)
+const Posts = new mongoose.model('post', postSchema)
 
 module.exports = Posts
