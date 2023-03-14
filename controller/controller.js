@@ -66,10 +66,13 @@ const register_index = (req, res) => {
 
 const home_index = (req, res) => {
     if(req.isAuthenticated()){
+        console.log(req.user)
         Posts.find()
         .then((post) => {
-            console.log(post)
-            res.render('home', {post: post})
+            res.render('home', {
+                post: post,
+                user_details: req.user
+            })
         }).catch((err) => {
             console.log(err);
             res.status(500).send('An error occurred', err)
@@ -123,7 +126,6 @@ const post_index = (req, res) => {
 }
 
 const post_post =  (req, res, next) => {
-            console.log(req.body.caption);
             const postData = {
                 caption: req.body.caption,
                 date: Date.now(),

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/functions.js"></script>
     <script src="https://kit.fontawesome.com/abc91cab4a.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -22,28 +23,30 @@
                     </div>
                 </div>
             </div>
+            <% const userDetails = user_details %>
             <% post.forEach(posts => { %>
             <div class="card">
                 <div class="card-header">
                     
                     <div class="card-image" style="flex-grow: 1;">
-                       <img src="data:image/<%=posts.image.contentType%>;base64
-                         <%=posts.image.data.toString('base64')%>" alt="" srcset="">
+                        <div class="card-pfp">
+
+                        </div>
                     </div>
                     <div class="card-title" style="flex-grow: 4;">
-                        <%=   %>
+                        <%= userDetails.username  %>
                     </div>
                     <div class="card-more" style="flex-grow: 1;">
-                        <%=  %>
+                        <%=  %> <p><i class="fa-solid fa-ellipsis"></i></p>
                     </div>
                 </div>
                 <div class="card-body">
-                     <img src="data:image/<%=posts.image.contentType%>;base64
-                <%=posts.image.data.toString('base64')%>.png" alt="" srcset="">
+                    <img class="image" src="data:image/<%=posts.image.contentType%>;base64,
+                    <%=posts.image.data.toString('base64')%>" >
                 </div>
                 <div class="card-footer">
                     <div class="card-footer-item">
-                        <p><i class="fa-regular fa-heart" onclick="liked()"></i></p>
+                        <p><i class="fa-regular fa-heart" id="like" click="liked()"></i></p>
                         <p><%=  posts.likes %></p>
                     </div>
                     <div class="card-footer-item">
@@ -81,10 +84,10 @@
                         <p><%= timeSince(new Date(posts.date)) %> <span>ago</span></p>              
                     </div>
                 </div>
-                <% }) %>
             </div>
+            <% }) %>
         </div>
-        <%- include('./partials/footer.ejs')%>
+        <%- include('./partials/footer.ejs', {userDetails})%>
     </div>
     <script src="js/functions.js"></script>
 </body>

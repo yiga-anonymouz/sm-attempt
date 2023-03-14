@@ -24,4 +24,11 @@ function timeSince(date) {
     }
     return Math.floor(seconds) + " seconds";
 }
+
+function liked() {
+    const like = document.getElementById('like')
+
+    like.style.color = "#fb3958" ;
+    like.style.background = "#fb3958" ;
+}
     
