@@ -53,7 +53,7 @@ const login_post = (req, res) => {
             console.log(err)
         }else{
             passport.authenticate('local')(req, res, () => {
-                res.render('home', {username: user.email})
+                res.redirect('/')
             })
         }
     } )
@@ -66,15 +66,16 @@ const register_index = (req, res) => {
 
 const home_index = (req, res) => {
     if(req.isAuthenticated()){
-        Posts.find({'id': 1})
+        Posts.find()
         .then((post) => {
+            console.log(post)
             res.render('home', {post: post})
         }).catch((err) => {
             console.log(err);
             res.status(500).send('An error occurred', err)
         })
     }else{
-       res.render('login')
+       res.redirect('/login')
     }
 }
 
@@ -94,7 +95,7 @@ const profile_index = (req, res) => {
         console.log(qdata)
         res.render('profile', {data: qdata})
     }else{
-        res.redirect('/')
+        res.redirect('/login')
     }
    
 }
@@ -106,7 +107,7 @@ const register_post = (req , res) => {
             res.redirect('/register')
         }else{
             passport.authenticate('local') (req, res, () => {
-                res.redirect('/home')
+                res.redirect('/')
             })
         }
     })
@@ -117,7 +118,7 @@ const post_index = (req, res) => {
     if(req.isAuthenticated()){
         res.render('post')
     }else{
-        res.redirect('/')
+        res.redirect('/login')
     }
 }
 
@@ -125,6 +126,8 @@ const post_post =  (req, res, next) => {
             console.log(req.body.caption);
             const postData = {
                 caption: req.body.caption,
+                date: Date.now(),
+                likes: 0,
                 image: {
                     data: fs.readFileSync(path.join(`${__dirname}/../uploads/${req.file.filename}`)),
                     contentType: 'image/png'
@@ -139,6 +142,14 @@ const post_post =  (req, res, next) => {
                 })
                 
 };
+
+const messages_index = (req, res) => {
+    if(req.isAuthenticated()){
+        res.render('messages')
+    }else{
+        res.redirect('/login')
+    }
+}
 
 const not_found = (req, res) => {
     res.send('GO BACK MF')
@@ -155,5 +166,6 @@ module.exports = {
     post_index,
     post_post,
     not_found,
+    messages_index,
     upload
 }

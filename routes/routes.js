@@ -3,7 +3,7 @@ const Router = express.Router()
 const Controller = require(`../controller/controller`)
 
 
-Router.get('/' , Controller.login_index)
+Router.get('/login' , Controller.login_index)
 
 Router.post('/' , Controller.login_post)
 
@@ -18,6 +18,8 @@ Router.get('/profile', Controller.profile_index)
 Router.get('/new-post', Controller.post_index)
 
 Router.post('/new-post', Controller.upload.single('image') , Controller.post_post)
+
+Router.get('/messages', Controller.messages_index)
 
 Router.get(Controller.not_found)
 
