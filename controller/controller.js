@@ -119,17 +119,39 @@ const register_post = (req , res) => {
 
 const post_index = (req, res) => {
     if(req.isAuthenticated()){
-        res.render('post')
+        const protocol = req.protocol;
+        const host = req.hostname;
+        const url = req.originalUrl;
+        const port = process.env.PORT || PORT;
+    
+        const fullUrl = `${protocol}://${host}:${port}${url}`
+    
+        const q = uniRl.parse(fullUrl , true)
+        const qdata = q.query
+    
+        res.render('post', {data: qdata})
     }else{
         res.redirect('/login')
     }
 }
 
 const post_post =  (req, res, next) => {
+            const protocol = req.protocol;
+            const host = req.hostname;
+            const url = req.originalUrl;
+            const port = process.env.PORT || PORT;
+
+            const fullUrl = `${protocol}://${host}:${port}${url}`
+
+            const q = uniRl.parse(fullUrl , true)
+            const qdata = q.query
+
+            console.log(qdata.user_id)
             const postData = {
                 caption: req.body.caption,
                 date: Date.now(),
                 likes: 0,
+                id: qdata.user_id,
                 image: {
                     data: fs.readFileSync(path.join(`${__dirname}/../uploads/${req.file.filename}`)),
                     contentType: 'image/png'
@@ -138,7 +160,7 @@ const post_post =  (req, res, next) => {
             Posts.create(postData)
                 .then((item) =>{
                     item.save()
-                    res.redirect('/profile');
+                    res.redirect('/');
                 }).catch((err) => {
                     console.log(err);
                 })
