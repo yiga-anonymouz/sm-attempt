@@ -69,9 +69,19 @@ const home_index = (req, res) => {
         console.log(req.user)
         Posts.find()
         .then((post) => {
-            res.render('home', {
-                post: post,
-                user_details: req.user
+            Posts.find()
+            .populate('id')
+            .exec()
+            .then((post_user) => {
+                
+                res.render('home', {
+                    post: post,
+                    user_details: req.user,
+                    post_user: post_user
+                })
+            })
+            .catch((err) => {
+                console.log(err)
             })
         }).catch((err) => {
             console.log(err);
@@ -96,7 +106,16 @@ const profile_index = (req, res) => {
         const qdata = q.query
     
         console.log(qdata)
-        res.render('profile', {data: qdata})
+
+        Posts.find({id: qdata.user_id})
+            .populate('id')
+            .exec()
+            .then((post_user) => {
+                res.render('profile', {
+                    data: qdata,
+                    post_user: post_user
+                })
+            })
     }else{
         res.redirect('/login')
     }
@@ -179,6 +198,13 @@ const not_found = (req, res) => {
     res.send('GO BACK MF')
 }
 
+const logout = (req, res) => {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+}
+
 
 module.exports = {
     login_index,
@@ -191,5 +217,6 @@ module.exports = {
     post_post,
     not_found,
     messages_index,
+    logout,
     upload
 }

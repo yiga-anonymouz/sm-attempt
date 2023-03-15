@@ -39,7 +39,12 @@
                   
                   <div class="tab-container">
                         <div class="tab-content" id="post">
-
+                            <% post_user.forEach(posts => { %>
+                                <div class="tab-image">
+                                    <img class="image" src="data:image/<%=posts.image.contentType%>;base64,
+                                    <%=posts.image.data.toString('base64')%>" >
+                                </div>
+                            <% }) %>
                         </div>
                   </div>
 

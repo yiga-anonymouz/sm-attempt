@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
     likes: Number,
     id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'profiles',
+        ref: 'profile',
       },
     image: {
         data: Buffer,

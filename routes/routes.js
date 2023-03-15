@@ -21,6 +21,8 @@ Router.post('/new-post', Controller.upload.single('image') , Controller.post_pos
 
 Router.get('/messages', Controller.messages_index)
 
+Router.get('/logout', Controller.logout)
+
 Router.get(Controller.not_found)
 
 

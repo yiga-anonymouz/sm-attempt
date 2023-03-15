@@ -268,8 +268,25 @@ a{
 }
 
 .tab-content{
-    
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    border: 1px solid red;
 }
+
+.tab-image{
+    width: 33.3%;
+    height: 100px;
+    border: 1px solid green;
+}
+
+.tab-image img{
+    height: 100px;
+    object-fit: cover;
+}
+
+
 
 /* 
 
