@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="container">
+        <% const userDetails = user_details %>
         <div class="container-post">
             <div class="post-card">
                 <div class="post-body">
@@ -26,6 +27,7 @@
                 </form>
             </div>
         </div>
+        <%- include('./partials/footer.ejs', {userDetails})%>
     </div>
 </body>
 </html>

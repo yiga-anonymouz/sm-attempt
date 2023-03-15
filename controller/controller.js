@@ -113,7 +113,8 @@ const profile_index = (req, res) => {
             .then((post_user) => {
                 res.render('profile', {
                     data: qdata,
-                    post_user: post_user
+                    post_user: post_user,
+                    user_details: req.user,
                 })
             })
     }else{
@@ -148,7 +149,10 @@ const post_index = (req, res) => {
         const q = uniRl.parse(fullUrl , true)
         const qdata = q.query
     
-        res.render('post', {data: qdata})
+        res.render('post', {
+            data: qdata,
+            user_details: req.user,
+        })
     }else{
         res.redirect('/login')
     }
